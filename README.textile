@@ -1,14 +1,18 @@
+h1. Use case
+
 Nothing better than a use case to explain the purpose of this gem.
 
 * Suppose you have to build a dashboard in the admin area of your Rails app and you want to have the number of subscriptions per day.
 * Suppose that you are using SQLite3 for development, MySQL for production (pretty standard setup)
 
 Easily with SQL date functions, you could do that :
+
 <pre>
 Subscriber.select('STRFTIME("%Y-%m-%d", created_at) AS day, COUNT(*) AS subscriptions').group('day')
 </pre>
 
 Which would run this query :
+
 <pre>
 SELECT STRFTIME("%Y-%m-%d", created_at) AS day, COUNT(*) AS subscriptions
 FROM subscribers
@@ -18,7 +22,37 @@ GROUP BY day
 ... but wait... now the app has to go live in my production env which uses MySQL ! Replace @STRFTIME()@ with @DATE_FORMAT()@.
 What if tomorrow I switch to PostgreSQL ? Replace @DATE_FORMAT()@ with @DATE_TRUNC()@.
 
-This gem translate SQL functions that do the exact same thing, but have different syntax in each RDBMS that is being used.
+h1. SqlFunk to the rescue
 
-These functions are implemented :
-* count_by(column_name, :group_by => "day"|"month"|"year")
+The SqlFunk gem translates SQL functions that do the exact same thing, but have different syntax in each RDBMS that is being used.
+
+So far, these functions are implemented :
+* @count_by(column_name, :group_by => "day"|"month"|"year")@
+* ... more to come
+
+h1. Example
+
+Given that you have a Subscriber model.
+
+<pre>
+  Subscriber.count_by("created_at", :group_by => "day")
+</pre>
+
+Will generate these queries depending on the database adapter that is being used :
+
+<pre>
+  # SQLite
+  SELECT STRFTIME("%Y-%m-%d", created_at) AS day, COUNT(*) AS subscriptions
+  FROM subscribers
+  GROUP BY day
+  
+  # MySQL
+  SELECT DATE_FORMAT(created_at, "%Y-%m") AS day, COUNT(*) AS subscriptions
+  FROM subscribers
+  GROUP BY day
+  
+  # PostgreSQL
+  SELECT DATE_TRUNC("day", created_at) AS day, COUNT(*) AS subscriptions
+  FROM subscribers
+  GROUP BY day
+</pre>

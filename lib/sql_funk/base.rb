@@ -35,8 +35,18 @@ module SqlFunk
         end
       end
 
-      select("#{date_func} AS #{options[:group_column]}, COUNT(*) AS count_all").group(options[:group_column]).order("#{options[:group_column]} #{options[:order]}")
+      self.select("#{date_func} AS #{options[:group_column]}, COUNT(*) AS count_all").group(options[:group_column]).order("#{options[:group_column]} #{options[:order]}")
     end
+    # 
+    # def method_missing(id, *args, &block)
+    # 
+    #   return count_by(args[0], { :group_by => "day" }.merge(args[1]))
+    # 
+    #   # return count_by(args[0], { :group_by => "day" }.merge(args[1])) if id.id2name == /count_by_day/
+    #   #     
+    #   # return count_by(args[0], { :group_by => Regexp.last_match(1) }.merge(args[1])) if id.id2name =~ /count_by_(.+)/
+    # 
+    # end
     
   end
 

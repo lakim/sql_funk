@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.authors     = [ 'Louis-Alban KIM' ]
   s.email       = [ 'louis.alban.kim@gmail.com' ]
   s.homepage    = "http://rubygems.org/gems/sql_funk"
-  s.summary     = "Adds SQL functions to ActiveRecord, including date functions"
+  s.summary     = "Rails gem that extends ActiveRecord with SQL functions, including date functions"
   s.description = "This gem lets you use SQL functions that behaves differently depending on the database adapter that is being used."
 
   s.required_rubygems_version = ">= 1.3.6"

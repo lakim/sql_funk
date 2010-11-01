@@ -1,3 +1,6 @@
 pkg/*
 *.gem
 .bundle
+*.sqlite3.db
+*.log
+.DS_Store

@@ -1,0 +1,17 @@
+sqlite3:
+  :adapter: sqlite3
+  :database: test/sql_funk_plugin.sqlite3.db
+
+postgresql:
+  :adapter: postgresql
+  :username: postgres
+  :password: postgres
+  :database: yaffle_plugin_test
+  :min_messages: ERROR
+
+mysql:
+  :adapter: mysql
+  :host: localhost
+  :username: root
+  :password: password
+  :database: yaffle_plugin_test
