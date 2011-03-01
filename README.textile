@@ -31,8 +31,11 @@ So far, these functions are implemented :
 * ... more to come
 
 h1. Installation
+
 In your Gemfile:
-  gem 'sql_funk'
+<pre>
+gem 'sql_funk'
+</pre>
 
 h1. Example
 
