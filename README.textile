@@ -30,6 +30,10 @@ So far, these functions are implemented :
 * @count_by(column_name, :group_by => "day"|"month"|"year")@
 * ... more to come
 
+h1. Installation
+In your Gemfile:
+  gem 'sql_funk'
+
 h1. Example
 
 Given that you have a Subscriber model.
