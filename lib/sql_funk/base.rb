@@ -1,5 +1,4 @@
 # SqlFunk
-
 require 'active_record'
 
 module SqlFunk
@@ -21,22 +20,8 @@ module SqlFunk
         self.select("#{date_func} AS #{options[:group_column]}, COUNT(*) AS count_all").group(options[:group_column]).order("#{options[:group_column]} #{options[:order]}")       
       end
       
-      
-      group_method_name = "count_by_#{group}".to_sym
-      define_method group_method_name  do |column_name, options={}|
-        options[:order] ||= 'ASC'
-        options[:group_column] ||= group
-
-        date_func = date_truncate(column_name, group)
-
-
-        self.select("#{date_func} AS #{options[:group_column]}, COUNT(*) AS count_all").group(options[:group_column]).order("#{options[:group_column]} #{options[:order]}")       
-      end
-      
     end
 
-    
-   
     private
     def date_truncate(column_name, group_by)
       case group_by
